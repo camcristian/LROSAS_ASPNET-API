@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Sistema.Entidades.Eventos
+namespace Sistema.Web.Models.Eventos
 {
-    public class Evento
+    public class CrearEventosViewModel
     {
 
-        public int ID { get; set; }
         public int ID_USUARIO { get; set; }
         public string title { get; set; }
         public string details { get; set; }
