@@ -14,5 +14,6 @@ namespace Sistema.Web.Models.Eventos
         public string date { get; set; }
         public Boolean open { get; set; }
         public int Tipo { get; set; }
+        public int Estado { get; set; }
     }
 }

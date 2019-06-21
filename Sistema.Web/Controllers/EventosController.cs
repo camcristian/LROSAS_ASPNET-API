@@ -37,7 +37,8 @@ namespace Sistema.Web.Controllers
                 details = e.details,
                 date =e.date,
                 open=false,
-               Tipo =e.Tipo
+               Tipo =e.Tipo,
+             Estado=e.Estado
     });
 
         }
@@ -60,7 +61,7 @@ namespace Sistema.Web.Controllers
                 title = model.title,
                 details = model.details,
                 date = model.date,
-                Tipo = 1,
+                Tipo =model.Tipo,
                };
 
             _context.Evento.Add(evento);
@@ -75,6 +76,74 @@ namespace Sistema.Web.Controllers
 
             return Ok();
         }
+
+
+        // PUT: api/Eventos/Descartar/1
+        //[Authorize(Roles = "Administrador")]
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Descartar([FromRoute] int id)
+        {
+
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var evento = await _context.Evento.FirstOrDefaultAsync(u => u.ID == id);
+
+            if (evento == null)
+            {
+                return NotFound();
+            }
+
+            evento.Estado = 2;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        // PUT: api/Eventos/Realizado/1
+        //[Authorize(Roles = "Administrador")]
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Realizado([FromRoute] int id)
+        {
+
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var evento = await _context.Evento.FirstOrDefaultAsync(u => u.ID == id);
+
+            if (evento == null)
+            {
+                return NotFound();
+            }
+
+            evento.Estado = 4;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
 
 
         private bool EventoExists(int id)

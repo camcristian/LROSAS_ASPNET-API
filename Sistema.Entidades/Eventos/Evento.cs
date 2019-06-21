@@ -13,6 +13,7 @@ namespace Sistema.Entidades.Eventos
         public string details { get; set; }
         public string date { get; set; }
         public int Tipo { get; set; }
+        public int Estado { get; set; }
 
     }
 }
