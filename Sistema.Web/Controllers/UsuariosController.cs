@@ -163,6 +163,10 @@ namespace Sistema.Web.Controllers
 
 
 
+
+
+
+
         // PUT: api/Usuarios/Desactivar/1
         [Authorize(Roles = "Administrador")]
         [HttpPut("[action]/{id}")]

@@ -14,5 +14,8 @@ namespace Sistema.Web.Models.Eventos
         public string date { get; set; }
         public int Tipo { get; set; }
 
+        public string Estado { get; set; }
+        public string Encargado { get; set; }
+
     }
 }

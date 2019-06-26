@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Email.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Sistema.Datos;
 using Sistema.Entidades.Eventos;
 using Sistema.Web.Models.Eventos;
@@ -17,16 +20,41 @@ namespace Sistema.Web.Controllers
     {
         private readonly DbContextSistema _context;
 
-        public EventosController(DbContextSistema context)
+        public EventosController(DbContextSistema context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
+       
         }
 
+        public IConfiguration Configuration { get; }
+
+
+
+        public async Task ActualizarFecha()
+        {
+
+
+      
+            using (SqlConnection sql = new SqlConnection(Configuration.GetConnectionString("Conexion")))
+            {
+                using (SqlCommand cmd = new SqlCommand("_Web_Eventos_FechaLimite", sql))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    //cmd.Parameters.Add(new SqlParameter("@value1", value.Value1));
+                    //cmd.Parameters.Add(new SqlParameter("@value2", value.Value2));
+                    await sql.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                    return;
+                }
+            }
+        }
 
         // GET: api/Eventos/Listar
         [HttpGet("[action]")]
         public async Task<IEnumerable<EventosViewModel>> Listar()
         {
+            await ActualizarFecha();
             var EVENTOS = await _context.Evento.ToListAsync();
 
             return EVENTOS.Select(e => new EventosViewModel
@@ -38,10 +66,78 @@ namespace Sistema.Web.Controllers
                 date =e.date,
                 open=false,
                Tipo =e.Tipo,
-             Estado=e.Estado
+             Estado=e.Estado,
+            Encargado =e.Encargado
     });
 
         }
+
+
+
+
+        // GET: api/Eventos/ListarUsuario/id
+
+        [HttpGet("[action]/{xusuario}")]
+        public async Task<IEnumerable<EventosViewModel>> ListarUsuario([FromRoute] int xusuario)
+        {
+
+            await ActualizarFecha();
+
+            var EVENTOS = await _context.Evento
+                .Where(i => i.ID_USUARIO == xusuario)
+                .ToListAsync();
+
+            return EVENTOS.Select(e => new EventosViewModel
+            {
+                ID = e.ID,
+                ID_USUARIO = e.ID_USUARIO,
+                title = e.title,
+                details = e.details,
+                date = e.date,
+                open = false,
+                Tipo = e.Tipo,
+                Estado = e.Estado,
+                Encargado = e.Encargado
+            });
+
+
+        }
+
+
+
+
+
+
+
+
+
+        // GET: api/Eventos/ListarUsuario/1
+        //[HttpGet("[action]")]
+
+        //public async Task<IEnumerable<EventosViewModel>> ListarUsuario([FromRoute] int xID_USUARIO)
+        //{
+        //    var EVENTOS = await _context.Evento.Where(u => u.ID_USUARIO == xID_USUARIO).ToListAsync();
+          
+
+
+        //    return EVENTOS.Select(e => new EventosViewModel
+        //    {
+        //        ID = e.ID,
+        //        ID_USUARIO = e.ID_USUARIO,
+        //        title = e.title,
+        //        details = e.details,
+        //        date = e.date,
+        //        open = false,
+        //        Tipo = e.Tipo,
+        //        Estado = e.Estado
+        //    });
+
+        //}
+
+
+
+
+
 
 
 
@@ -62,7 +158,9 @@ namespace Sistema.Web.Controllers
                 details = model.details,
                 date = model.date,
                 Tipo =model.Tipo,
-               };
+                Encargado = model.Encargado,
+                Estado=1
+            };
 
             _context.Evento.Add(evento);
             try

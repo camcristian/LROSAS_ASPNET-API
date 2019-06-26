@@ -15,5 +15,8 @@ namespace Sistema.Entidades.Eventos
         public int Tipo { get; set; }
         public int Estado { get; set; }
 
+        public string Encargado { get; set; }
+        
+
     }
 }
