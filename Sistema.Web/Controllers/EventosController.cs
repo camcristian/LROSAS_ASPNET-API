@@ -124,7 +124,7 @@ namespace Sistema.Web.Controllers
         //public async Task<IEnumerable<EventosViewModel>> ListarUsuario([FromRoute] int xID_USUARIO)
         //{
         //    var EVENTOS = await _context.Evento.Where(u => u.ID_USUARIO == xID_USUARIO).ToListAsync();
-          
+
 
 
         //    return EVENTOS.Select(e => new EventosViewModel
@@ -144,6 +144,44 @@ namespace Sistema.Web.Controllers
 
 
 
+        // PUT: api/Eventos/Posponer
+      //  [Authorize(Roles = "Administrador")]
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Posponer([FromBody] EventosPosponerViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (model.ID <= 0)
+            {
+                return BadRequest();
+            }
+
+            var evento = await _context.Evento.FirstOrDefaultAsync(u => u.ID == model.ID);
+
+            if (evento == null)
+            {
+                return NotFound();
+            }
+
+            evento.ID = model.ID;
+            evento.details = model.details;
+            evento.Estado = 2;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
+
+            return Ok();
+        }
 
 
 
@@ -182,6 +220,39 @@ namespace Sistema.Web.Controllers
             return Ok();
         }
 
+        // PUT: api/Eventos/Descartar/1
+        //[Authorize(Roles = "Administrador")]
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> DescartarPosponer([FromRoute] int id)
+        {
+
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var evento = await _context.Evento.FirstOrDefaultAsync(u => u.ID == id);
+
+            if (evento == null)
+            {
+                return NotFound();
+            }
+
+            evento.Estado = 2;
+            evento.details = "Pospuesto";
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
+
+            return Ok();
+        }
 
         // PUT: api/Eventos/Descartar/1
         //[Authorize(Roles = "Administrador")]
