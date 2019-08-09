@@ -297,7 +297,7 @@ namespace Sistema.Web.Controllers
             {
                 return BadRequest();
             }
-
+ 
             var evento = await _context.Evento.FirstOrDefaultAsync(u => u.ID == id);
 
             if (evento == null)

@@ -2,13 +2,15 @@
 using Sistema.Datos.Mapping.Clientes;
 using Sistema.Datos.Mapping.Eventos;
 using Sistema.Datos.Mapping.Usuarios;
+using Sistema.Datos.Mapping.Riesgo;
 using Sistema.Entidades.Clientes;
 using Sistema.Entidades.Eventos;
 using Sistema.Entidades.Usuarios;
-
+using Sistema.Entidades.Riesgo;
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 
 namespace Sistema.Datos
 {
@@ -20,6 +22,8 @@ namespace Sistema.Datos
 
         public DbSet<Socio> Socios { get; set; }
         public DbSet<Evento> Evento { get; set; }
+
+        public DbSet<RIESGO_PRESTAMOS_SOLICITADOS> RIESGO_PRESTAMOS_SOLICITADOS { get; set; }
         public DbContextSistema(DbContextOptions<DbContextSistema> options) : base(options)
         {
             
@@ -33,6 +37,7 @@ namespace Sistema.Datos
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new SocioMap());
             modelBuilder.ApplyConfiguration(new EventoMap());
+            modelBuilder.ApplyConfiguration(new RIESGO_PRESTAMOS_SOLICITADOSMap());
         }
 
     }
