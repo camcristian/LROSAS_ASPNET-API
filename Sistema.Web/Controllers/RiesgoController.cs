@@ -20,11 +20,54 @@ namespace Sistema.Web.Controllers
         public RiesgoController(DbContextSistema context)
         {
             _context = context;
+        } 
+        
+        
+        // GET: api/Riesgo/Listar
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<RiesgoViewModel>> Listar()
+        {
+            var riesgo
+           = await _context.RIESGO_PRESTAMOS_SOLICITADOS
+           .OrderByDescending(v => v.id_solicitud)
+           .Take(100)
+           .ToListAsync();
+
+            return riesgo.Select(r => new RiesgoViewModel
+            {
+                id_solicitud = r.id_solicitud,
+                Nrosocio = r.Nrosocio,
+                fecha_solicitud = r.fecha_solicitud.Substring(0, 10),
+                producto = r.producto,
+                objetivo = r.objetivo,
+                monto_solicitado = r.monto_solicitado,
+                Ejecutiva = r.Ejecutiva,
+                Estado = r.Estado,
+                tasa = r.tasa,
+                nrocuotas = r.nrocuotas,
+                corcredito = r.corcredito
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            });
         }
 
         // GET: api/Riesgo/Listar
         [HttpGet("[action]/{FechaInicio}/{FechaFinal}")]
-        public async Task<IEnumerable<RiesgoViewModel>> Listar([FromRoute]int FechaInicio, int FechaFinal)
+        public async Task<IEnumerable<RiesgoViewModel>> Listarfechas([FromRoute]int FechaInicio, int FechaFinal)
         {
             var riesgo 
            = await _context.RIESGO_PRESTAMOS_SOLICITADOS
@@ -36,19 +79,17 @@ namespace Sistema.Web.Controllers
 
             return riesgo.Select(r => new RiesgoViewModel
             {
-
-
-
         id_solicitud = r.id_solicitud,
                 Nrosocio = r.Nrosocio,
-                fecha_solicitud = r.fecha_solicitud.Substring(0,10),
-             producto = r.producto,
-               monto_solicitado = r.monto_solicitado,
-          Ejecutiva  = r.Ejecutiva,
+                fecha_solicitud = r.fecha_solicitud.Substring(0, 10),
+                producto = r.producto,
+                objetivo= r.objetivo,
+                monto_solicitado = r.monto_solicitado,
+                Ejecutiva = r.Ejecutiva,
                 Estado = r.Estado,
-             tasa = r.tasa,
-             nrocuotas = r.nrocuotas,
-                  corcredito = r.corcredito
+                tasa = r.tasa,
+                nrocuotas = r.nrocuotas,
+                corcredito = r.corcredito
             });
         }
 

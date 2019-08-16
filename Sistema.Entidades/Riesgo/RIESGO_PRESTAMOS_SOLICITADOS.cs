@@ -6,16 +6,146 @@ namespace Sistema.Entidades.Riesgo
 {
    public class RIESGO_PRESTAMOS_SOLICITADOS
     {
+
         public long id_solicitud { get; set; }
         public string Nrosocio { get; set; }
         public string fecha_solicitud { get; set; }
         public string producto { get; set; }
         public string objetivo { get; set; }
         public string monto_solicitado { get; set; }
-        public string Ejecutiva { get; set; }
-        public string Estado { get; set; }
-        public string tasa { get; set; }
+        public string capital { get; set; }
+        public string prepago { get; set; }
+        public string NroPrepagos { get; set; }
         public string nrocuotas { get; set; }
+        public string primera_cuota { get; set; }
+        public string tasa { get; set; }
+        public string dias_gracia { get; set; }
+        public string ncreditos { get; set; }
+        public string fechaprimervencimiento { get; set; }
+        public string forpago { get; set; }
+        public string tiporenta { get; set; }
+        public string protestosmorocidades { get; set; }
+        public string comportamientopago { get; set; }
+        public string Edeudafinanciera { get; set; }
+        public string EdeudaHipo { get; set; }
+        public string EdeudaConsumo { get; set; }
+        public string EdeudaComercial { get; set; }
+        public string EDeudadVencidas { get; set; }
+        public string ELineaCredito { get; set; }
+        public string ENumeroAcreedores { get; set; }
+        public string Itotaldeuda { get; set; }
+        public string IdeudaConsumo { get; set; }
+        public string IdeudaComercial { get; set; }
+        public string IDeudaIndirecta { get; set; }
+        public string IPagoMensual { get; set; }
+        public string RLP { get; set; }
+        public string CargaFinanciera { get; set; }
+        public string ExternaAcreditado { get; set; }
+        public string Activos { get; set; }
+        public string Propiedades { get; set; }
+        public string Vehiculos { get; set; }
+        public string RentaLiquidaDepurada { get; set; }
+        public string LVL { get; set; }
+        public string Capacidad { get; set; }
+        public string Validaciones { get; set; }
+        public string Ejecutiva { get; set; }
+        public string Sucursal { get; set; }
+        public string Comentario_Ejecutiva { get; set; }
+        public string Aprobacion_Gerencia { get; set; }
+        public string Aprobacion_SubGerencia { get; set; }
+        public string Aprobacion_Operaciones { get; set; }
+        public string Estado { get; set; }
+        public string Puntaje { get; set; }
+        public string Anos_contrato { get; set; }
+        public string Edad { get; set; }
+        public string Anos_antiguedad { get; set; }
+        public string Atribucion { get; set; }
+        public string Aprobacion_Comision_Credito_Interno { get; set; }
+        public string Aprobacion_Comision_Credito_Superior { get; set; }
+        public int V_Puntaje { get; set; }
+        public int V_Capacidad { get; set; }
+        public int V_Endeudamiento { get; set; }
+        public int V_Comerciales { get; set; }
+        public int V_Antiguedad10 { get; set; }
+        public int V_Antiguedad1 { get; set; }
+        public int V_Moras { get; set; }
+        public int V_Edad { get; set; }
+        public string Nombre { get; set; }
+        public string Rut { get; set; }
+        public string Monto_capital { get; set; }
+        public string Cuotas_prepago { get; set; }
+        public string Bandeja { get; set; }
+        public string fecha_subgerente { get; set; }
+        public string Fecha_agencia { get; set; }
+        public string Fecha_gerencia { get; set; }
+        public string Fecha_riesgo { get; set; }
+        public string Puntajes_Validaciones { get; set; }
+        public string Agencia_Perfil { get; set; }
+        public string Subgerencia_Perfil { get; set; }
+        public string Gerencia_Perfil { get; set; }
+        public string Riesgo_perfil { get; set; }
+        public string Fecha_CCI { get; set; }
+        public string CCI_Perfil { get; set; }
+        public string CCS_perfil { get; set; }
+        public string Condicional { get; set; }
+        public string Presocio { get; set; }
         public string corcredito { get; set; }
-}
+        public string comportamiento_clasificacion { get; set; }
+        public string comportamiento_abonocapital { get; set; }
+        public string comportamiento_baja_clasificacion { get; set; }
+        public string Tasa_aumento { get; set; }
+        public string Riesgo_Recomienda { get; set; }
+        public string Ejecutivo_convenio { get; set; }
+        public string Tasa_solicitada { get; set; }
+        public string Condicional_Tasa { get; set; }
+        public string Condicional_Monto { get; set; }
+        public string Condicional_Plazo { get; set; }
+        public string renegocia_refinancia { get; set; }
+        public string PreAprobacion_Riesgo { get; set; }
+        public string PreAprobacion_Agente { get; set; }
+        public string PreAgencia_Perfil { get; set; }
+        public string Fecha_preagencia { get; set; }
+        public string Fecha_CCS { get; set; }
+        public string Sede { get; set; }
+        public string FueraDeZona { get; set; }
+        public string Formadepago2 { get; set; }
+        public string Region { get; set; }
+        public string Institucion { get; set; }
+        public string Plataforma { get; set; }
+        public string tasa_castigada { get; set; }
+        public string tasa_real { get; set; }
+        public string comentario_tasa { get; set; }
+        public string Descuento_campaña { get; set; }
+        public string Eperiodo { get; set; }
+        public string EDeudadVencidasIndirectas { get; set; }
+        public string RutAval1 { get; set; }
+        public string RutAval2 { get; set; }
+        public string modificaciondeudaexterna { get; set; }
+        public string PYM6 { get; set; }
+        public string PYM6A12 { get; set; }
+        public string PYM12A24 { get; set; }
+        public string PYM24 { get; set; }
+        public int ID_RENTA { get; set; }
+        public string MaximoMontoPlanilla { get; set; }
+        public string MaximaCuotaPlanilla { get; set; }
+        public string COD_DACA { get; set; }
+        public string Atencion { get; set; }
+        public int MES_PRIMERA { get; set; }
+        public int ANO_PRIMERA { get; set; }
+        public int COD_FORMAPAGO { get; set; }
+        public int COD_INST { get; set; }
+        public string ESTADO_INI { get; set; }
+        public int DISPONIBLE { get; set; }
+        public int CUOTA_ULTIMA { get; set; }
+        public int COD_SUCURSAL { get; set; }
+        public string Condicional_Plazo_R { get; set; }
+        public string Condicional_Monto_R { get; set; }
+        public string Condicional_Tasa_R { get; set; }
+        public string Condicional_R { get; set; }
+        public string PreAprobacion_Comercial { get; set; }
+        public string Riesgo_Renta_Verifica { get; set; }
+        public string Rentaliquida { get; set; }
+        public string PerfilAsignacion { get; set; }
+        public string Bandeja2 { get; set; }
+    }
 }

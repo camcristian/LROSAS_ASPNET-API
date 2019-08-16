@@ -257,6 +257,7 @@ namespace Sistema.Web.Controllers
                 new Claim(ClaimTypes.Role, usuario.rol.nombre ),
                 new Claim("idusuario", usuario.idusuario.ToString() ),
                 new Claim("rol", usuario.rol.nombre ),
+                new Claim("EXPIRACION", DateTime.UtcNow.ToString( )),
                 new Claim("nombre", usuario.nombre )
             };
 
@@ -283,9 +284,12 @@ namespace Sistema.Web.Controllers
             var token = new JwtSecurityToken(
               _config["Jwt:Issuer"],
               _config["Jwt:Issuer"],
-              expires: DateTime.Now.AddMinutes(30),
+                //     expires:     Convert.ToDateTime ("Sun Jan 18 1970 23:54:02 GMT-0300"),
+                //   expires: DateTime.Parse("2015-11-18T18:25:43.511Z"),
+                expires: DateTime.UtcNow.AddMinutes(1),
               signingCredentials: creds,
               claims: claims);
+
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
